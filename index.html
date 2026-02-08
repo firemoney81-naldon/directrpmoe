@@ -1,23 +1,390 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+
+  <!-- Schema.org Article/FinancialService 마크업(JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialService",
+    "serviceType": "Car Insurance Guide for Electric Vehicles",
+    "name": "미니 일렉트릭 자동차 보험료 완벽 가이드",
+    "image": "https://domain.com/mini-electric-insurance-logo.png",
+    "url": "https://domain.com/mini-electric-insurance",
+    "telephone": "031-123-4567",
+    "description": "2026년 최신 미니 일렉트릭(Mini Cooper SE) 자동차 보험료 견적 비교, 평균 비용, 가입 팁, 장단점 분석. 전기차 특약부터 저렴하게 가입하는 방법까지 모든 정보를 제공합니다.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "경기도 평택시 ○○로 ○○",
+      "addressLocality": "평택시",
+      "addressRegion": "경기",
+      "postalCode": "17900",
+      "addressCountry": "KR"
+    },
+    "provider": {
+        "@type": "Organization",
+        "name": "보험 정보 리서치 센터"
+    },
+    "areaServed": {
+      "@type": "ServiceArea",
+      "name": "전국"
+    },
+    "isAccessibleForFree": true,
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Mini Electric Insurance Plans",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Mini Cooper SE Insurance"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Electric Car Special Provisions"
+          }
+        }
+      ]
+    }
+  }
+  </script>
+
+  <!-- Custom CSS for improved hierarchy and aesthetics -->
+  <style>
+    body { font-family: 'Noto Sans KR', sans-serif; margin:0; padding:0; background:#f0f4f8; color:#333; line-height:1.7; }
+    header { background: linear-gradient(135deg, #4285f4 0%, #0b3d91 100%); color:#ffffff; padding:40px 20px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+    header h1 { font-size:3rem; margin-bottom:10px; font-weight:800; }
+    header p { font-size:1.2rem; margin-top:0; }
+    section { max-width:900px; margin:30px auto; padding:30px; background:#ffffff; border-radius:16px; box-shadow:0 4px 16px rgba(0,0,0,0.08); }
+    h2 { font-size:2.2rem; color:#0b3d91; border-bottom:3px solid #a3c4ff; padding-bottom:10px; margin-top:20px; margin-bottom:20px; font-weight:700; }
+    h3 { font-size:1.6rem; color:#4285f4; margin-top:20px; margin-bottom:10px; font-weight:600; }
+    p, li, dd, dt, table { font-size:1.05rem; line-height:1.8; color:#444; }
+    ul, ol { padding-left:25px; margin-bottom:20px; }
+    li { margin-bottom:8px; }
+    table { width:100%; border-collapse: separate; border-spacing: 0; margin:25px 0; border-radius:8px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.05); }
+    th, td { border:1px solid #e0e6f0; padding:15px; text-align:left; }
+    th { background:#a3c4ff; color:#fff; font-weight:700; border:none; }
+    td { background:#ffffff; }
+    .highlight { background-color: #f0f8ff; padding:15px; border-left:5px solid #4285f4; border-radius:6px; margin:20px 0; }
+    a { color:#0b3d91; text-decoration:none; transition: color 0.3s ease; }
+    a:hover { text-decoration:underline; color:#4285f4; }
+    .btn-cta {
+      display:inline-block;
+      padding:16px 35px;
+      background:#4285f4;
+      color:#fff;
+      font-weight:700;
+      border:none;
+      border-radius:30px;
+      box-shadow:0 6px 12px rgba(66, 133, 244, 0.4);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      cursor:pointer;
+      text-decoration:none;
+      text-align:center;
+      margin-top:20px;
+      font-size:1.1rem;
+    }
+    .btn-cta:hover { background:#3367d6; transform:translateY(-2px); }
+    .btn-group { text-align:center; margin-top:30px; }
+    .anchor { display:block; position:relative; top:-100px; visibility:hidden; }
+
+    /* For graph/chart simulation */
+    .chart-container { background:#f9f9f9; padding:20px; border-radius:8px; margin:25px 0; }
+    .chart-bar { background:#a3c4ff; height:30px; border-radius:4px; margin-bottom:10px; transition: width 1s ease-in-out; }
+    .chart-label { display:flex; justify-content:space-between; font-weight:bold; margin-bottom:5px; color:#555; }
+
+    /* Form Styles */
+    form { background:#fcfcfc; padding:30px; border-radius:12px; border:1px solid #e0e6f0; }
+    form label { display:block; font-weight:600; color:#333; margin-top:15px; margin-bottom:5px; }
+    form input, form select, form textarea { width:100%; padding:12px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box; font-size:1rem; }
+    form button { margin-top:20px; }
+    .form-group { margin-bottom:15px; }
+
+    /* Responsive adjustments */
+    @media(max-width:768px) {
+      header { padding:30px 15px; }
+      header h1 { font-size:2rem; }
+      section { margin:15px auto; padding:20px; }
+      h2 { font-size:1.8rem; }
+      h3 { font-size:1.4rem; }
+      p, li, dd, dt { font-size:0.95rem; }
+      .btn-cta { width:100%; font-size:1rem; padding:12px 25px; }
+    }
+  </style>
+
+  <!-- Google Fonts for better Korean text rendering -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <h1>미니 일렉트릭 자동차 보험료 완벽 가이드</h1>
+    <p>미니 쿠퍼 SE (Mini Cooper SE) 오너를 위한 2026년 최신 보험료 견적 비교 및 절약 팁</p>
+    <div class="btn-group">
+      <a class="btn-cta" href="#quote-request">맞춤 견적 바로 비교하기</a>
+    </div>
+  </header>
+
+  <nav aria-label="페이지 내 이동">
+    <section>
+      <ul style="display:flex; justify-content:space-around; list-style:none; padding:0;">
+        <li><a href="#insurance-overview">보험 개요</a></li>
+        <li><a href="#cost-factors">보험료 결정 요인</a></li>
+        <li><a href="#price-comparison">비용 분석 및 비교</a></li>
+        <li><a href="#special-coverage">전기차 특약의 중요성</a></li>
+        <li><a href="#saving-tips">보험료 절약 팁</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </section>
+  </nav>
+
+  <!-- Section 1: Introduction to Mini Electric Insurance -->
+  <section id="insurance-overview">
+    <span id="insurance-overview-anchor" class="anchor"></span>
+    <h2>미니 일렉트릭(Mini Cooper SE) 보험의 핵심 이해</h2>
+    <p>미니(Mini) 브랜드의 첫 번째 순수 전기차 모델인 미니 일렉트릭(Mini Cooper SE)은 특유의 감성과 주행 성능으로 많은 사랑을 받고 있습니다. 하지만 전기차의 특성상 일반 내연기관 차량과는 다른 보험료 산정 기준이 적용됩니다. 미니 일렉트릭 오너들이 가장 궁금해하는 <span style="font-weight:bold; color:#d64d00;">보험료 평균 금액</span>, <span style="font-weight:bold; color:#d64d00;">저렴한 가입 방법</span>, 그리고 <span style="font-weight:bold; color:#d64d00;">전기차 전용 특약</span>의 중요성을 자세히 알아보겠습니다.</p>
+    <p class="highlight"><strong>SEO 핵심 요약:</strong> 미니 일렉트릭 보험료는 차량가액, 배터리 비용, 주행 환경 등 여러 요인에 의해 결정됩니다. 특히 고가인 배터리 교체 비용 때문에 자차 보험료가 내연기관차보다 높게 책정될 수 있으므로, 정확한 견적을 비교하는 것이 필수적입니다.</p>
+
+    <h3>미니 일렉트릭 모델별 보험료 산정 기준</h3>
+    <p>미니 일렉트릭은 기본적으로 <span style="font-weight:bold;">미니 쿠퍼 SE</span> 모델을 기반으로 합니다. 2026년형 모델을 기준으로, 미니 3도어 일렉트릭, 미니 5도어 일렉트릭(예상 모델), 그리고 미니 컨버터블 일렉트릭과 같은 다양한 바디 타입이 존재하며, 각 모델의 차량 가액에 따라 보험료가 달라집니다. 특히 전기차는 차량 가격에서 배터리가 차지하는 비중이 높아, 차량가액 자체가 높게 책정되어 <span style="font-weight:bold;">보험료가 상승</span>하는 주요 원인이 됩니다.</p>
+    <ul>
+      <li><strong>미니 쿠퍼 SE 3도어:</strong> 가장 기본적인 전기차 모델로, 차량가액이 보험료의 기본이 됩니다.</li>
+      <li><strong>미니 컨버터블 일렉트릭:</strong> 일반 컨버터블 모델보다 차량가액이 높고, 특수한 차체 구조로 인해 자차 보험료가 더 높게 책정될 수 있습니다.</li>
+      <li><strong>미니 일렉트릭 풀옵션 vs. 기본 모델:</strong> 옵션 추가에 따른 차량 가액 상승분도 보험료에 반영됩니다.</li>
+    </ul>
+  </section>
+
+  <!-- Section 2: Factors Determining Premium -->
+  <section id="cost-factors">
+    <span id="cost-factors-anchor" class="anchor"></span>
+    <h2>2026년 미니 일렉트릭 보험료에 영향을 미치는 핵심 요인 분석</h2>
+    <p>자동차 보험료는 운전자 개인의 특성과 차량의 특성, 그리고 가입하는 보험사의 상품 구성에 따라 복합적으로 결정됩니다. 미니 일렉트릭의 경우, 전기차라는 특수성을 고려한 추가적인 요소가 작용합니다. <span style="font-weight:bold;">미니 일렉트릭 보험료 예상 금액</span>을 산정할 때 반드시 고려해야 할 주요 요인들을 살펴보겠습니다.</p>
+
+    <h3>1. 운전자 조건 및 경력 (가장 큰 변수)</h3>
+    <p>보험사는 운전자의 위험도를 측정하여 보험료를 산정합니다. 운전자의 나이, 운전 경력, 사고 이력 등은 보험료 견적에 <span style="font-weight:bold; color:#d64d00;">가장 큰 영향</span>을 미칩니다.</p>
+    <ul>
+      <li><strong>연령별 보험료:</strong> 일반적으로 20대 운전자의 보험료가 가장 높고, 30대, 40대로 갈수록 낮아집니다. 20대의 경우, 미니 일렉트릭과 같은 고가 차량의 보험료는 특히 <span style="font-weight:bold;">평균보다 훨씬 높게</span> 책정될 수 있습니다.</li>
+      <li><strong>운전 경력:</strong> 운전 경력이 짧을수록, 특히 첫차 가입 시에는 보험료가 비쌉니다. 무사고 경력이 쌓이면 보험료 할인율이 적용되어 <span style="font-weight:bold;">장기적으로 저렴한 보험료</span>를 기대할 수 있습니다.</li>
+      <li><strong>사고 이력:</strong> 최근 3년간 사고 이력이 많으면 보험료 할증이 붙습니다.</li>
+    </ul>
+
+    <h3>2. 차량 가액 및 수리 비용 (전기차 특성)</h3>
+    <p>미니 일렉트릭 보험료를 결정하는 가장 중요한 요소 중 하나는 차량가액입니다. 전기차는 내연기관차와 비교하여 엔진이 없는 대신 고가의 배터리가 탑재됩니다. 이 배터리가 전체 차량 가액에서 차지하는 비중이 매우 높습니다.</p>
+    <ul>
+      <li><strong>높은 차량가액:</strong> 미니 일렉트릭은 차량가액이 일반 내연기관 미니보다 높습니다. 이로 인해 <span style="font-weight:bold;">자차 보험료(자기차량손해)</span>가 상승합니다.</li>
+      <li><strong>배터리 교체 비용:</strong> 사고 시 배터리 팩 손상은 <span style="font-weight:bold;">수리 비용이 매우 비싸</span>기 때문에 보험사 입장에서는 높은 위험으로 간주됩니다. 이는 <span style="font-weight:bold;">보험료 견적</span>을 올리는 직접적인 원인이 됩니다.</li>
+      <li><strong>수입차 특성:</strong> 미니는 수입차이기 때문에 부품 수급 및 공임 비용이 국산차보다 비쌉니다. 이는 전반적인 보험료에 영향을 미칩니다.</li>
+    </ul>
+
+    <h3>3. 주행 거리 및 운행 환경</h3>
+    <p>보험사들은 <span style="font-weight:bold;">운전자의 주행 습관</span>에 따라 보험료를 할인해주는 특약을 운영합니다. 미니 일렉트릭 운전자라면 특히 주행 거리에 따른 할인 특약을 활용하는 것이 중요합니다.</p>
+    <ul>
+      <li><strong>주행거리 할인 특약:</strong> 연간 주행 거리가 짧을수록 보험료를 할인해줍니다. 미니 일렉트릭 오너는 충전 인프라 문제로 인해 주행 거리가 짧은 경우가 많으므로 이 특약을 적극 활용할 수 있습니다.</li>
+      <li><strong>교통 법규 준수:</strong> 무사고 운전 경력과 교통 법규 준수 이력은 보험료 할인으로 이어집니다.</li>
+    </ul>
+
+    <h3>4. 보험사 및 상품 비교</h3>
+    <p>보험사마다 미니 일렉트릭에 대한 위험률 평가 기준이 다릅니다. 따라서 <span style="font-weight:bold;">저렴한 곳</span>을 찾기 위해서는 여러 보험사의 <span style="font-weight:bold;">보험료 비교</span>가 필수입니다.</p>
+    <ul>
+      <li><strong>보험사별 할인율 차이:</strong> A보험사는 전기차에 대한 위험률을 높게 책정할 수 있지만, B보험사는 특정 차종에 대한 할인 프로모션을 제공할 수 있습니다.</li>
+      <li><strong>온라인 다이렉트 보험 vs. 설계사 가입:</strong> 다이렉트 보험은 설계사 수수료가 없어 일반적으로 더 저렴합니다. <span style="font-weight:bold;">내돈내산 후기</span>를 보면 다이렉트 보험으로 가입하는 경우가 많습니다.</li>
+    </ul>
+  </section>
+
+  <!-- Section 3: Detailed Cost Analysis and Comparison -->
+  <section id="price-comparison">
+    <span id="price-comparison-anchor" class="anchor"></span>
+    <h2>미니 일렉트릭 보험료 예상 비용: 2026년 가이드</h2>
+    <p>미니 일렉트릭의 실제 보험료는 운전자 조건에 따라 천차만별입니다. 여기서는 <span style="font-weight:bold;">평균적인 미니 일렉트릭 보험료</span>를 연령대별로 제시하고, 일반 내연기관 미니와의 <span style="font-weight:bold;">차이점</span>을 비교하여 <span style="font-weight:bold;">가장 저렴한 곳</span>을 찾기 위한 기준점을 제시합니다.</p>
+
+    <h3>1. 미니 일렉트릭 보험료 연령대별 비교 (2026년 기준)</h3>
+    <p>아래 표는 운전 경력 3년 이상, 부부한정, 무사고 기준을 바탕으로 한 <span style="font-weight:bold;">미니 일렉트릭 보험료 예상 금액</span>입니다. 실제 견적은 다를 수 있으며, <span style="font-weight:bold;">보험료 순위 비교</span>는 개인 조건에 따라 매번 달라집니다.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>운전자 연령대</th>
+          <th>미니 일렉트릭 예상 평균 보험료</th>
+          <th>주요 특징</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>20대 (만 26세 미만)</td>
+          <td>₩1,800,000 ~ ₩3,000,000+</td>
+          <td>가장 높은 보험료 구간. 높은 사고 위험률 및 운전 경력 부족으로 인한 할증 적용.</td>
+        </tr>
+        <tr>
+          <td>30대 (만 30세 이상)</td>
+          <td>₩1,100,000 ~ ₩1,800,000</td>
+          <td>운전 경력이 쌓이며 보험료가 안정화되는 시기. 다이렉트 보험으로 <span style="font-weight:bold;">저렴한 견적</span>을 찾을 수 있음.</td>
+        </tr>
+        <tr>
+          <td>40대 이상 (만 40세 이상)</td>
+          <td>₩800,000 ~ ₩1,300,000</td>
+          <td>무사고 경력 할인 최대 적용 구간. <span style="font-weight:bold;">가장 싼곳</span>을 찾을 수 있는 연령대.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>2. 미니 일렉트릭 vs. 미니 내연기관 모델 보험료 비교 (장단점 분석)</h3>
+    <p>미니 쿠퍼 SE (전기차)와 미니 쿠퍼 S (내연기관차)의 <span style="font-weight:bold;">보험료 차이점</span>을 비교해보겠습니다. 차량가액과 수리비용 측면에서 전기차의 <span style="font-weight:bold;">장점과 단점</span>이 명확하게 드러납니다.</p>
+    <div class="highlight">
+      <h4>장점: 전기차 할인 특약 (친환경차 할인)</h4>
+      <p>전기차는 배터리 충전 시 발생하는 전기요금 등 유지비가 저렴합니다. 보험료에서도 <span style="font-weight:bold;">친환경차 할인 특약</span>이 적용되어 일부 보험사에서는 할인 혜택을 제공합니다. 이는 미니 일렉트릭의 <span style="font-weight:bold;">장점</span> 중 하나입니다.</p>
+      <h4>단점: 높은 자차 보험료 (배터리 위험성)</h4>
+      <p>전기차는 배터리 수리비가 높습니다. 특히 미니 일렉트릭의 경우 배터리 팩 교체 시 <span style="font-weight:bold;">예상 금액</span>이 매우 높게 책정되어 자차 보험료를 상승시키는 주요 <span style="font-weight:bold;">단점</span>이 됩니다.</p>
+    </div>
+
+    <h3>3. 미니 일렉트릭 모델별 상세 비교 (2026년)</h3>
+    <p>미니 일렉트릭은 단일 모델로 판매되지만 트림별 옵션에 따라 차량가액이 달라집니다. <span style="font-weight:bold;">미니 일렉트릭 모델명</span>에 따른 보험료 견적을 정확하게 비교하려면, 차량 출고 시의 옵션 목록을 꼼꼼히 확인해야 합니다. 특히 고성능 버전인 <span style="font-weight:bold;">미니 JCW 일렉트릭</span>(예상)이 출시될 경우, 보험료는 더욱 상승할 가능성이 높습니다.</p>
+    <div class="chart-container">
+      <h3>미니 일렉트릭 vs. 일반 미니 보험료 차이 (예상 금액 그래프)</h3>
+      <div class="chart-label"><span>Mini Cooper SE (전기차)</span><span>₩1,200,000</span></div>
+      <div class="chart-bar" style="width: 80%; background-color: #0b3d91;"></div>
+      <div class="chart-label"><span>Mini Cooper S (내연기관)</span><span>₩900,000</span></div>
+      <div class="chart-bar" style="width: 60%; background-color: #a3c4ff;"></div>
+      <p style="text-align:right; font-size:0.9rem;">*40대 운전자, 무사고 기준 예상 보험료</p>
+    </div>
+  </section>
+
+  <!-- Section 4: Special Provisions for Electric Vehicles -->
+  <section id="special-coverage">
+    <span id="special-coverage-anchor" class="anchor"></span>
+    <h2>미니 일렉트릭 오너가 반드시 확인해야 할 전기차 특약</h2>
+    <p>일반 자동차 보험으로도 전기차를 운행할 수 있지만, 전기차 특성상 일반 차량과는 다른 위험 요소가 존재합니다. <span style="font-weight:bold;">미니 일렉트릭 보험료</span>를 비교할 때는 기본 보장뿐만 아니라 <span style="font-weight:bold;">전기차 전용 특약</span>의 포함 여부를 반드시 확인해야 합니다.</p>
+
+    <h3>1. 전기차 배터리 신규가입/보장 특약</h3>
+    <p>사고 시 배터리가 파손되면 교체 비용이 수천만원에 달할 수 있습니다. <span style="font-weight:bold;">전기차 배터리 특약</span>은 배터리 손상 시 보장 금액을 추가해주는 것으로, <span style="font-weight:bold;">미니 일렉트릭</span>과 같은 수입 전기차 오너에게는 필수적인 특약입니다.</p>
+    <ul>
+      <li><strong>보장 범위:</strong> 사고로 인한 배터리 손상은 물론, 충전 중 발생하는 손상이나 화재까지 보장합니다.</li>
+      <li><strong>배터리 전용 보상:</strong> 배터리 교체 비용을 보상해줍니다. 이 특약이 없을 경우 높은 자기부담금으로 인해 실제 보장 금액이 예상보다 적을 수 있습니다.</li>
+    </ul>
+
+    <h3>2. 충전기 파손 및 충전 중 사고 보상 특약</h3>
+    <p>전기차의 충전 중 사고는 일반 차량에서는 발생하지 않는 독특한 위험입니다. 미니 일렉트릭 충전 중 충전기 자체나 충전 케이블이 파손되거나, 화재가 발생할 경우를 대비해야 합니다.</p>
+    <ul>
+      <li><strong>충전기 파손 보상:</strong> 공용 충전소에서 충전 중 다른 차량이 충전기를 파손시킨 경우, 또는 케이블 손상 시 보상을 받을 수 있습니다.</li>
+      <li><strong>충전 중 화재 위험:</strong> 전기차 화재 위험은 낮지만, 발생 시에는 진압이 어렵고 대규모 피해를 유발할 수 있어 대비가 필요합니다.</li>
+    </ul>
+
+    <h3>3. 긴급출동 서비스 (견인 거리 확대)</h3>
+    <p>전기차는 배터리가 완전히 방전되면 주행이 불가능합니다. 일반 차량의 긴급출동 서비스 견인 거리는 제한적이지만, <span style="font-weight:bold;">전기차 특약</span>을 통해 견인 거리를 100km 이상으로 확대할 수 있습니다. 미니 일렉트릭 오너는 충전 인프라가 부족한 지역으로의 장거리 운행 시 이 특약이 유용합니다.</p>
+
+    <h3>4. 미니 일렉트릭 관련 추가 특약 고려 사항</h3>
+    <p>이외에도 <span style="font-weight:bold;">미니 일렉트릭 장단점</span>을 고려한 다양한 특약이 존재합니다. 예를 들어, <span style="font-weight:bold;">자차 보험료를 낮추는 방법</span> 중 하나인 '자기부담금'을 높이는 대신, '신차 교체 비용 특약'에 가입하여 고가 차량의 손해를 대비할 수 있습니다.</p>
+  </section>
+
+  <!-- Section 5: Saving Tips and Strategies -->
+  <section id="saving-tips">
+    <span id="saving-tips-anchor" class="anchor"></span>
+    <h2>미니 일렉트릭 보험료 절약 팁: 저렴하게 가입하는 방법</h2>
+    <p>높은 <span style="font-weight:bold;">미니 일렉트릭 보험료</span>가 부담되시나요? 다음은 <span style="font-weight:bold;">가장 저렴한 곳</span>에서 가입할 수 있도록 도와주는 실질적인 <span style="font-weight:bold;">보험료 절약 팁</span>입니다. 이 방법들을 활용하여 <span style="font-weight:bold;">평균보다 싼 금액</span>으로 보험에 가입해보세요.</p>
+
+    <h3>1. 주행거리 할인 특약 활용 (마일리지 특약)</h3>
+    <p>미니 일렉트릭 오너의 <span style="font-weight:bold;">보험료 절약</span>에 가장 효과적인 방법입니다. 연간 주행 거리에 따라 보험료를 환급받을 수 있습니다. 보통 3,000km, 5,000km, 10,000km 등 구간별로 할인율이 달라집니다. <span style="font-weight:bold;">미니 일렉트릭</span>은 주로 도심 주행에 활용되는 경우가 많아 이 특약을 통해 상당한 금액을 절약할 수 있습니다.</p>
+
+    <h3>2. 안전 운전 습관 (블랙박스, T맵 안전운전 점수)</h3>
+    <p>블랙박스 설치는 <span style="font-weight:bold;">보험료 할인</span>의 기본입니다. 또한 최근에는 T맵, 카카오내비 등 내비게이션 앱의 안전운전 점수를 활용한 할인 특약이 보편화되었습니다. 미니 일렉트릭 운전자라면 평소 운전 습관을 관리하여 <span style="font-weight:bold;">할인 순위</span>를 높일 수 있습니다.</p>
+
+    <h3>3. 다이렉트 보험 비교 및 가입</h3>
+    <p>설계사를 통한 가입 대신 온라인 다이렉트 보험으로 가입하면 약 10%~20%의 보험료 절감 효과를 볼 수 있습니다. 여러 보험사의 다이렉트 견적을 <span style="font-weight:bold;">비교</span>하여 <span style="font-weight:bold;">가장 싼곳</span>을 찾는 것이 중요합니다.</p>
+
+    <h3>4. 운전자 범위 및 연령 한정 특약</h3>
+    <p>운전자를 '본인 한정' 또는 '부부 한정'으로 좁히면 보험료가 크게 절감됩니다. 특히 미니 일렉트릭과 같은 고가 차량은 운전자 범위 설정에 따라 보험료 차이가 심합니다. <span style="font-weight:bold;">만 26세 이상 한정</span> 등 연령 제한을 설정하는 것도 <span style="font-weight:bold;">보험료를 저렴하게</span> 만드는 방법입니다.</p>
+
+    <h3>5. 신차 vs. 중고차 (보험료 차이)</h3>
+    <p>미니 일렉트릭 중고차를 구입하는 경우에도 보험료는 신차와 유사하게 책정되지만, 차량가액이 낮아지기 때문에 자차 보험료가 조금씩 하락합니다. 하지만 전기차의 경우 배터리 보장 특약을 반드시 신중하게 확인해야 합니다.</p>
+  </section>
+
+  <!-- Section 6: FAQ (Frequently Asked Questions) -->
+  <section id="faq">
+    <span id="faq-anchor" class="anchor"></span>
+    <h2>자주 묻는 질문 (FAQ)</h2>
+    <dl>
+      <dt>Q1: 미니 일렉트릭의 보험료가 일반 미니보다 비싼 이유는 무엇인가요?</dt>
+      <dd>A: 미니 일렉트릭은 차량가액이 높고, 특히 배터리 교체 비용이 고가입니다. 이로 인해 보험사의 손해율이 높아 자차 보험료가 상대적으로 높게 책정됩니다. 하지만 친환경차 할인 등 <span style="font-weight:bold;">미니 일렉트릭 장점</span>을 활용하면 보험료를 절감할 수 있습니다.</dd>
+
+      <dt>Q2: 20대 운전자가 미니 일렉트릭을 가입하면 <span style="font-weight:bold;">평균</span> 보험료는 얼마인가요?</dt>
+      <dd>A: 20대 초반의 경우, 운전 경력이 짧아 사고 위험률이 높게 평가됩니다. 미니 일렉트릭의 경우 <span style="font-weight:bold;">예상 금액</span>이 200만원을 훌쩍 넘길 수 있습니다. <span style="font-weight:bold;">저렴한 곳</span>을 찾으려면 만 26세 이상 한정 특약을 이용하거나, 가족 보험에 추가 가입하는 방법을 고려해야 합니다.</dd>
+
+      <dt>Q3: <span style="font-weight:bold;">미니 일렉트릭 반도체 이슈</span>가 보험료에 영향을 미치나요?</dt>
+      <dd>A: 반도체 수급 이슈로 인해 차량 출고가 지연되거나 중고차 가격이 급등할 수 있습니다. 보험료 산정은 차량 가액을 기준으로 하므로, 중고차 가격이 높아지면 오히려 보험료가 상승할 수 있습니다. 다만, 이 부분은 일시적인 현상이며 장기적으로는 큰 영향이 없습니다.</dd>
+
+      <dt>Q4: 전기차 보험료 <span style="font-weight:bold;">비교 사이트 순위</span>를 믿을 수 있나요?</dt>
+      <dd>A: 온라인 비교 사이트는 여러 보험사의 견적을 한 번에 보여주어 <span style="font-weight:bold;">가장 저렴한 곳</span>을 찾는 데 도움을 줍니다. 하지만 개인 조건에 따른 최종 견적은 다를 수 있으므로, 최종적으로는 보험사별 특약을 꼼꼼하게 <span style="font-weight:bold;">비교</span>해야 합니다.</dd>
+
+      <dt>Q5: 미니 일렉트릭의 <span style="font-weight:bold;">자차 보험료</span>를 낮추는 <span style="font-weight:bold;">장점</span>이 있나요?</dt>
+      <dd>A: 미니 일렉트릭은 '개인용' 차량으로 분류되므로, 비즈니스용으로 사용되는 차량에 비해 보험료가 저렴합니다. 또한 배터리 보장 특약을 제외하고 가입하거나 자기부담금 비율을 높여 자차 보험료를 낮추는 방법도 있습니다.</dd>
+    </dl>
+  </section>
+
+  <!-- Section 7: External Links (Reliability and SEO enhancement) -->
+  <section id="external-links">
+    <span id="external-links-anchor" class="anchor"></span>
+    <h2>신뢰성 있는 미니 일렉트릭 및 보험 정보 참고 자료</h2>
+    <p>미니 일렉트릭에 대한 더 자세한 정보 및 관련 보험 정책에 대한 공신력 있는 자료를 참고하여 정확한 정보를 얻으세요. (참고: 아래 링크들은 가상의 예시이며, 실제 정부 또는 신뢰할 수 있는 외부 링크로 대체되어야 합니다.)</p>
+    <ul>
+      <li><a href="https://namuwiki.org/wiki/MINI_Cooper_SE" target="_blank">나무위키: 미니 쿠퍼 SE 상세 정보</a> - 미니 일렉트릭 모델에 대한 상세 스펙, 역사, 장단점 분석.</li>
+      <li><a href="http://www.k-erc.org/" target="_blank">한국전기차충전인프라협의회 (KEVCI)</a> - 전기차 충전 및 인프라 관련 정책, 안전 수칙.</li>
+      <li><a href="https://www.ins.or.kr/" target="_blank">손해보험협회</a> - 자동차 보험료 산출 기준 및 보험 상품 공시 정보.</li>
+      <li><a href="https://www.mot.go.kr/" target="_blank">국토교통부 (Ministry of Land, Infrastructure and Transport)</a> - 전기차 관련 정부 정책 및 법규.</li>
+      <li><a href="https://www.mini.co.kr/" target="_blank">미니 코리아 공식 웹사이트</a> - 미니 일렉트릭 2026년형 모델 정보 및 옵션 가이드.</li>
+    </ul>
+  </section>
+
+  <!-- Section 8: Call to Action (Form for Dwell Time and Conversion) -->
+  <section id="quote-request">
+    <span id="quote-request-anchor" class="anchor"></span>
+    <h2>미니 일렉트릭 맞춤 견적 상담 문의</h2>
+    <p>나의 조건에 맞는 <span style="font-weight:bold;">미니 일렉트릭 보험료</span>를 정확하게 <span style="font-weight:bold;">비교</span>해보세요. 아래 정보를 입력하시면 <span style="font-weight:bold;">가장 저렴한 곳</span>의 <span style="font-weight:bold;">예상 금액</span>을 실시간으로 안내해드립니다.</p>
+    <form action="/submit-quote" method="POST" style="max-width:700px; margin:auto;">
+      <div class="form-group">
+        <label for="name">이름<span style="color:red;">*</span></label>
+        <input type="text" id="name" name="name" required placeholder="예: 홍길동" />
+      </div>
+      <div class="form-group">
+        <label for="phone">연락처<span style="color:red;">*</span></label>
+        <input type="tel" id="phone" name="phone" required placeholder="010-1234-5678" pattern="[0-9\-]+" />
+      </div>
+      <div class="form-group">
+        <label for="birthdate">생년월일 (만 나이 확인용)<span style="color:red;">*</span></label>
+        <input type="text" id="birthdate" name="birthdate" required placeholder="예: 900101" />
+      </div>
+      <div class="form-group">
+        <label for="car-model">미니 일렉트릭 모델<span style="color:red;">*</span></label>
+        <select id="car-model" name="car_model" required>
+          <option value="">모델 선택</option>
+          <option value="Mini Cooper SE 3 Door">Mini Cooper SE 3 Door</option>
+          <option value="Mini Cooper SE Convertible">Mini Cooper SE Convertible</option>
+          <option value="Mini Cooper SE Countryman (PHEV)">Mini Cooper SE Countryman (PHEV)</option>
+          <option value="기타">기타 (직접 입력)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="car-year">차량 연식 (출고 예정일)<span style="color:red;">*</span></label>
+        <input type="text" id="car-year" name="car_year" required placeholder="예: 2026년식 또는 2024년 5월 출고 예정" />
+      </div>
+      <div class="form-group">
+        <label for="driver-range">운전자 범위<span style="color:red;">*</span></label>
+        <select id="driver-range" name="driver_range" required>
+          <option value="본인 한정">본인 한정</option>
+          <option value="부부 한정">부부 한정</option>
+          <option value="가족 한정">가족 한정</option>
+          <option value="누구나">누구나</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="driving-history">운전 경력 (무사고 기간)</label>
+        <input type="text" id="driving-history" name="driving_history" placeholder="예: 5년 무사고" />
+      </div>
+      <div class="form-group">
+        <label for="additional-needs">추가 문의 사항 (특약, 할인 팁 등)</label>
+        <textarea id="additional-needs" name="additional_needs" rows="3" placeholder="예: 주행거리 1만km 미만 예상, 블랙박스 설치 예정"></textarea>
+      </div>
+      <button type="submit" class="btn-cta">무료 견적 요청하기</button>
+    </form>
+  </section>
+
+  
